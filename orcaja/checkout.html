@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout | ResolveAí</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body data-page="checkout">
+  <header class="header">
+    <div class="container header__inner">
+      <a href="index.html" class="logo"><span class="logo__icon">RA</span><span>ResolveAí</span></a>
+      <a href="anunciar.html" class="btn btn--ghost btn--sm">← Voltar aos planos</a>
+    </div>
+  </header>
+
+  <main id="checkout-main">
+    <section class="section">
+      <div class="container checkout-layout">
+        <div class="checkout-resumo">
+          <h1 class="page-hero__title" style="font-size:var(--text-2xl);">Finalizar contratação</h1>
+          <div class="checkout-box">
+            <p class="checkout-box__label">Plano selecionado</p>
+            <h2 id="checkout-plano-nome" class="checkout-box__plano">—</h2>
+            <p id="checkout-plano-preco" class="checkout-box__preco">—</p>
+            <ul id="checkout-beneficios" class="pricing-card__features"></ul>
+          </div>
+          <p id="checkout-aviso" class="form-hint"></p>
+        </div>
+
+        <div class="checkout-form-wrap">
+          <form id="checkout-form" class="search-card">
+            <h2 class="inline-form-title" style="text-align:left;font-size:var(--text-lg);">Dados para ativação</h2>
+            <div class="form-group">
+              <label for="chk-empresa">Empresa</label>
+              <input type="text" id="chk-empresa" required>
+            </div>
+            <div class="form-group">
+              <label for="chk-nome">Responsável</label>
+              <input type="text" id="chk-nome" required>
+            </div>
+            <div class="form-group">
+              <label for="chk-whatsapp">WhatsApp</label>
+              <input type="tel" id="chk-whatsapp" required>
+            </div>
+            <div class="form-group">
+              <label for="chk-email">E-mail (opcional)</label>
+              <input type="email" id="chk-email" placeholder="para envio de comprovante">
+            </div>
+            <button type="submit" id="btn-pagar-stripe" class="btn btn--primary btn--lg" hidden>Pagar com Stripe</button>
+            <button type="button" id="btn-pagar-demo" class="btn btn--secondary btn--lg" style="margin-top:var(--space-3);width:100%;" hidden>Simular pagamento</button>
+            <p class="form-hint" style="margin-top:var(--space-4);">🔒 Pagamento processado pela Stripe. Não armazenamos dados de cartão.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="checkout-not-found" class="section" hidden>
+    <div class="container empty-state">
+      <h2>Plano não encontrado</h2>
+      <a href="anunciar.html" class="btn btn--primary">Ver planos</a>
+    </div>
+  </div>
+
+  <footer class="footer"><div class="container"><div class="footer__bottom"><p>ResolveAí · Pagamento seguro</p></div></div></footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/core.js"></script>
+  <script src="js/pagamentos.js"></script>
+  <script src="js/checkout.js"></script>
+</body>
+</html>

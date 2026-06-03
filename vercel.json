@@ -1,0 +1,10 @@
+﻿{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "version": 2,
+  "name": "resolveai",
+  "buildCommand": null,
+  "installCommand": null,
+  "outputDirectory": "orcaja",
+  "cleanUrls": true,
+  "trailingSlash": false
+}

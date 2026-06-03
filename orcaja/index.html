@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ResolveAí — Emergência em casa em São Paulo | Triagem grátis em 30s</title>
+  <meta name="description" content="Emergência doméstica em São Paulo? Triagem grátis em 30 segundos. Eletricista, encanador, chaveiro e mais — profissionais verificados respondem no WhatsApp. Sem app.">
+  <meta name="keywords" content="eletricista São Paulo, encanador urgente, técnico refrigeração, chaveiro, dedetizador, profissional verificado">
+  <link rel="canonical" href="https://resolveai.com.br/">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <meta property="og:url" content="https://resolveai.com.br/">
+  <meta property="og:site_name" content="ResolveAí">
+  <meta property="og:title" content="ResolveAí — Emergência em casa? Profissional em minutos">
+  <meta property="og:description" content="Triagem grátis em 30 segundos. Profissionais verificados da sua região respondem no WhatsApp — sem app, sem cadastro longo.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+  <header class="header" role="banner">
+    <div class="container header__inner">
+      <a href="index.html" class="logo" aria-label="ResolveAí — Página inicial">
+        <span class="logo__icon" aria-hidden="true">RA</span>
+        <span>ResolveAí</span>
+      </a>
+      <nav class="header__nav" aria-label="Menu principal">
+        <a href="busca.html">Buscar</a>
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#destaques">Profissionais</a>
+        <a href="#faq">Dúvidas</a>
+        <a href="anunciar.html">Para empresas</a>
+      </nav>
+      <a href="#form-orcamento" class="btn btn--primary btn--sm">Pedir ajuda agora</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero__grid">
+        <div class="hero__content">
+          <p class="hero__eyebrow">
+            <span class="live-pulse"><span class="live-pulse__dot"></span></span>
+            <span data-pedidos>2.400+</span> pedidos este mês em <span data-cidade>São Paulo</span>
+          </p>
+          <h1 id="hero-title" class="hero__title">
+            Emergência em casa? <em>ResolveAí</em> em <span data-cidade>São Paulo</span>.
+          </h1>
+          <p class="hero__subtitle">
+            Triagem grátis em 30 segundos. Profissionais verificados da sua região respondem no WhatsApp — sem app, sem cadastro longo.
+          </p>
+          <div class="hero__ctas">
+            <a href="#form-orcamento" class="btn btn--primary btn--lg">Pedir ajuda agora</a>
+            <a href="anunciar.html" class="btn btn--secondary btn--lg">Sou profissional — quero aparecer primeiro</a>
+          </div>
+          <p class="hero__micro">Quem responde primeiro · Média <span data-resposta>12 min</span> · Nota <span data-nota>4,8</span> · Triagem 100% grátis</p>
+        </div>
+
+        <aside class="hero-form-card" id="form-orcamento" aria-labelledby="form-title">
+          <div class="hero-form-card__header">
+            <h2 id="form-title" class="hero-form-card__title">Triagem em 30 segundos</h2>
+            <p class="hero-form-card__subtitle">Descreva o problema. Quem responde primeiro te chama no WhatsApp.</p>
+            <p class="hero-form-card__urgency">⚡ “Preciso agora” vai para o topo da fila</p>
+          </div>
+          <form id="orcamento-form" novalidate>
+            <div class="form-group">
+              <label for="nome">Seu nome</label>
+              <input type="text" id="nome" name="nome" placeholder="Ex.: João Silva" autocomplete="name" required>
+              <span class="form-error">Informe seu nome completo</span>
+            </div>
+            <div class="form-group">
+              <label for="telefone">WhatsApp / telefone</label>
+              <input type="tel" id="telefone" name="telefone" placeholder="(11) 99999-9999" autocomplete="tel" required>
+              <span class="form-hint">Usado só para o profissional te contactar</span>
+              <span class="form-error">Telefone inválido</span>
+            </div>
+            <div class="form-group">
+              <label for="cidade">Cidade</label>
+              <input type="text" id="cidade" name="cidade" value="São Paulo" required autocomplete="address-level2" data-places-city>
+              <span class="form-hint" data-places-status></span>
+              <span class="form-error">Informe a cidade</span>
+            </div>
+            <div class="form-group">
+              <label for="bairro">Bairro (opcional)</label>
+              <input type="text" id="bairro" name="bairro" placeholder="Ex.: Pinheiros, Tatuapé">
+            </div>
+            <div class="form-group">
+              <label for="problema">O que aconteceu?</label>
+              <textarea id="problema" name="problema" rows="2" placeholder="Ex.: tomada queimou, preciso de eletricista hoje"></textarea>
+              <span class="form-hint">Quanto mais claro, mais rápido o retorno no WhatsApp</span>
+            </div>
+            <div class="form-group">
+              <label for="servico">Qual profissional você precisa?</label>
+              <select id="servico" name="servico" required>
+                <option value="">Selecione a profissão</option>
+              </select>
+              <span class="form-hint">Ex.: quem instala ar — técnico em refrigeração</span>
+              <span class="form-error">Selecione o profissional</span>
+            </div>
+            <div class="form-group">
+              <label for="urgencia">Urgência</label>
+              <select id="urgencia" name="urgencia"></select>
+            </div>
+            <button type="submit" class="btn btn--primary btn--lg">Pedir ajuda agora</button>
+            <p class="form-hint" style="text-align: center; margin-top: var(--space-3);">
+              Ao enviar, você concorda em ser contactado por prestadores parceiros.
+            </p>
+          </form>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Trust strip -->
+    <section class="section section--alt" aria-label="Números de confiança">
+      <div class="container">
+        <div class="trust-strip">
+          <div class="trust-item">
+            <div class="trust-item__value" data-pedidos>2.400+</div>
+            <div class="trust-item__label">Pedidos / mês</div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-item__value" data-prestadores>180+</div>
+            <div class="trust-item__label">Profissionais ativos</div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-item__value" data-resposta>12 min</div>
+            <div class="trust-item__label">Tempo médio resposta</div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-item__value" data-nota>4,8</div>
+            <div class="trust-item__label">Avaliação média</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Categorias -->
+    <section class="section" aria-labelledby="categorias-title">
+      <div class="container">
+        <header class="section__header">
+          <h2 id="categorias-title" class="section__title">O que está acontecendo em casa?</h2>
+          <p class="section__subtitle">Escolha a profissão e inicie a triagem agora</p>
+        </header>
+        <div id="category-chips" class="category-chips"></div>
+      </div>
+    </section>
+
+    <!-- Como funciona -->
+    <section class="section section--alt" id="como-funciona" aria-labelledby="como-title">
+      <div class="container">
+        <header class="section__header">
+          <h2 id="como-title" class="section__title">Como funciona</h2>
+          <p class="section__subtitle">Triagem em 30 segundos — urgência local, não catálogo</p>
+        </header>
+        <div class="steps">
+          <article class="step">
+            <div class="step__number" aria-hidden="true">1</div>
+            <h3 class="step__title">Conte o que aconteceu</h3>
+            <p class="step__text">Nome, WhatsApp, cidade e urgência. Sem app, sem cadastro longo.</p>
+          </article>
+          <article class="step">
+            <div class="step__number" aria-hidden="true">2</div>
+            <h3 class="step__title">Quem responde primeiro</h3>
+            <p class="step__text">Profissionais verificados e em destaque da sua região entram em contato.</p>
+          </article>
+          <article class="step">
+            <div class="step__number" aria-hidden="true">3</div>
+            <h3 class="step__title">Resolve no WhatsApp</h3>
+            <p class="step__text">Combine horário e valor direto com quem pode ir agora.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Prestadores destaque -->
+    <section class="section" id="destaques" aria-labelledby="destaques-title">
+      <div class="container">
+        <header class="section__header">
+          <h2 id="destaques-title" class="section__title">Profissionais disponíveis agora</h2>
+          <p class="section__subtitle" id="providers-count">Carregando profissionais…</p>
+        </header>
+        <div id="providers-grid" class="providers-grid"></div>
+        <p style="text-align: center; margin-top: var(--space-8);">
+          <a href="#form-orcamento" class="btn btn--primary">Quero orçamento de todos disponíveis</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- Depoimentos -->
+    <section class="section section--alt" aria-labelledby="depoimentos-title">
+      <div class="container">
+        <header class="section__header">
+          <h2 id="depoimentos-title" class="section__title">Quem usou, recomenda</h2>
+          <p class="section__subtitle">Histórias reais de moradores de São Paulo</p>
+        </header>
+        <div id="testimonials-grid" class="testimonials-grid"></div>
+      </div>
+    </section>
+
+    <!-- CTA Prestador -->
+    <section class="section" id="anunciar" aria-labelledby="anunciar-title">
+      <div class="container">
+        <div class="cta-prestador">
+          <h2 id="anunciar-title">Apareça quando alguém precisa AGORA</h2>
+          <p>Destaque + leads urgentes no WhatsApp. Você aparece primeiro quando moradores de São Paulo pedem ajuda na hora.</p>
+          <a href="anunciar.html" class="btn btn--secondary btn--lg">Quero visibilidade + leads</a>
+          <span class="cta-prestador__price">Destaque 30 dias a partir de R$ 97 · Plano mensal R$ 149</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section section--alt" id="faq" aria-labelledby="faq-title">
+      <div class="container">
+        <header class="section__header">
+          <h2 id="faq-title" class="section__title">Perguntas frequentes</h2>
+          <p class="section__subtitle">Tudo o que você precisa saber antes de pedir orçamento</p>
+        </header>
+        <div id="faq-list" class="faq-list"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <p class="footer__brand">ResolveAí</p>
+          <p>Urgência local em São Paulo. Triagem grátis para quem precisa agora — profissionais verificados no WhatsApp.</p>
+        </div>
+        <div>
+          <p style="color: white; font-weight: 600; margin-bottom: var(--space-3);">Para clientes</p>
+          <ul class="footer__links">
+            <li><a href="#form-orcamento">Pedir orçamento</a></li>
+            <li><a href="busca.html">Buscar profissional</a></li>
+            <li><a href="eletricista-em-sao-paulo.html">Eletricista SP</a></li>
+            <li><a href="encanador-em-sao-paulo.html">Encanador SP</a></li>
+            <li><a href="tecnico-refrigeracao-em-sao-paulo.html">Téc. refrigeração SP</a></li>
+            <li><a href="chaveiro-em-sao-paulo.html">Chaveiro SP</a></li>
+            <li><a href="dedetizador-em-sao-paulo.html">Dedetizador SP</a></li>
+          </ul>
+        </div>
+        <div>
+          <p style="color: white; font-weight: 600; margin-bottom: var(--space-3);">Para empresas</p>
+          <ul class="footer__links">
+            <li><a href="anunciar.html">Anunciar empresa</a></li>
+            <li><a href="mailto:contato@resolveai.com.br">contato@resolveai.com.br</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2026 ResolveAí. Todos os direitos reservados. CNPJ em atualização.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Barra fixa mobile -->
+  <div class="mobile-cta-bar" role="complementary" aria-label="Ação rápida">
+    <div class="mobile-cta-bar__text">
+      <strong>Precisa agora?</strong>
+      <span>Triagem grátis em 30 seg</span>
+    </div>
+    <a href="#form-orcamento" class="btn btn--primary">Pedir ajuda</a>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/core.js"></script>
+  <script src="js/pagamentos.js"></script>
+  <script src="js/leads.js"></script>
+  <script src="js/google-places.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

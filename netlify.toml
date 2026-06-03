@@ -1,0 +1,4 @@
+﻿# Site estatico ResolveAi - pasta orcaja
+[build]
+  publish = "orcaja"
+  command = "echo Static site - sem build"

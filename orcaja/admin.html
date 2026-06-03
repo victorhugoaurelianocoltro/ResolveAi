@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Painel Admin | ResolveAí</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="adm-body">
+  <!-- Login -->
+  <div id="adm-login" class="adm-login-wrap">
+    <div class="adm-login-card">
+      <div class="adm-login-brand">
+        <div class="adm-login-brand__icon">RA</div>
+        <div>
+          <h1>ResolveAí Admin</h1>
+          <p>Painel de gestão</p>
+        </div>
+      </div>
+      <form id="form-login">
+        <div class="adm-field">
+          <label for="admin-pin">Senha de acesso</label>
+          <input type="password" id="admin-pin" required placeholder="Digite o PIN" autocomplete="current-password">
+        </div>
+        <p id="login-error" class="adm-error" hidden>PIN incorreto. Padrão: 1234</p>
+        <button type="submit" class="adm-btn adm-btn--primary">Entrar no painel</button>
+        <a href="index.html" class="adm-btn adm-btn--ghost">← Voltar ao site público</a>
+      </form>
+      <p style="margin-top:20px;font-size:0.75rem;color:#94a3b8;text-align:center;">
+        Altere o PIN em <code>js/config.js</code> → admin.pin
+      </p>
+    </div>
+  </div>
+
+  <!-- App -->
+  <div id="adm-app" class="adm-app" hidden>
+    <aside class="adm-sidebar" id="adm-sidebar">
+      <div class="adm-sidebar__brand">
+        <div class="adm-login-brand__icon">RA</div>
+        <div>
+          <strong>ResolveAí</strong>
+          <span>Painel administrativo</span>
+        </div>
+      </div>
+      <nav class="adm-nav" aria-label="Menu">
+        <button type="button" class="adm-nav__item is-active" data-panel="dashboard">
+          <span>📊</span> Dashboard
+        </button>
+        <button type="button" class="adm-nav__item" data-panel="prestadores">
+          <span>👷</span> Prestadores
+        </button>
+        <button type="button" class="adm-nav__item" data-panel="leads">
+          <span>📋</span> Leads
+          <span class="adm-nav__badge" id="badge-leads">0</span>
+        </button>
+        <button type="button" class="adm-nav__item" data-panel="cadastros">
+          <span>📝</span> Cadastros
+          <span class="adm-nav__badge" id="badge-cadastros">0</span>
+        </button>
+        <button type="button" class="adm-nav__item" data-panel="pedidos">
+          <span>💳</span> Pagamentos
+        </button>
+      </nav>
+      <div class="adm-sidebar__footer">
+        <a href="index.html" target="_blank" class="adm-btn adm-btn--outline adm-btn--sm" style="width:100%;margin-bottom:8px;">Ver site ↗</a>
+        <button type="button" id="btn-logout" class="adm-btn adm-btn--danger adm-btn--sm" style="width:100%;">Sair</button>
+      </div>
+    </aside>
+
+    <div class="adm-main">
+      <header class="adm-topbar">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <button type="button" class="adm-menu-toggle" id="btn-menu" aria-label="Menu">☰</button>
+          <h2 id="page-title">Dashboard</h2>
+        </div>
+        <div class="adm-topbar__actions">
+          <button type="button" id="btn-refresh" class="adm-btn adm-btn--outline adm-btn--sm">↻ Atualizar</button>
+          <button type="button" id="btn-export" class="adm-btn adm-btn--outline adm-btn--sm">⬇ Exportar</button>
+          <button type="button" id="btn-reset" class="adm-btn adm-btn--outline adm-btn--sm">↺ Reset</button>
+        </div>
+      </header>
+
+      <div class="adm-content">
+        <!-- Dashboard -->
+        <section id="panel-dashboard" class="adm-panel">
+          <div class="adm-kpis" id="kpis-row"></div>
+          <div class="adm-card">
+            <div class="adm-card__header">
+              <h3>Últimos leads recebidos</h3>
+              <button type="button" class="adm-btn adm-btn--outline adm-btn--sm" data-goto="leads">Ver todos</button>
+            </div>
+            <div class="adm-card__body">
+              <div class="adm-table-scroll">
+                <table class="adm-table">
+                  <thead>
+                    <tr><th>Data</th><th>Cliente</th><th>Profissão</th><th>Cidade</th><th></th></tr>
+                  </thead>
+                  <tbody id="tbody-dashboard-leads"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Prestadores -->
+        <section id="panel-prestadores" class="adm-panel" hidden>
+          <div class="adm-card">
+            <div class="adm-card__header">
+              <h3>Profissionais cadastrados</h3>
+              <input type="search" id="search-prestadores" class="adm-search" placeholder="Buscar nome ou bairro…">
+            </div>
+            <div class="adm-card__body">
+              <div class="adm-table-scroll">
+                <table class="adm-table">
+                  <thead>
+                    <tr>
+                      <th>Profissional</th>
+                      <th>Profissão</th>
+                      <th>Local</th>
+                      <th>Avaliação</th>
+                      <th>Status</th>
+                      <th>Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tbody-prestadores"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Leads -->
+        <section id="panel-leads" class="adm-panel" hidden>
+          <div class="adm-card">
+            <div class="adm-card__header">
+              <h3>Pedidos de orçamento</h3>
+              <button type="button" id="btn-clear-leads" class="adm-btn adm-btn--outline adm-btn--sm">Limpar lista</button>
+            </div>
+            <div class="adm-card__body">
+              <div class="adm-table-scroll">
+                <table class="adm-table">
+                  <thead>
+                    <tr><th>Data</th><th>Cliente</th><th>Telefone</th><th>Local</th><th>Situação</th><th>Profissão</th><th>Urgência</th><th></th></tr>
+                  </thead>
+                  <tbody id="tbody-leads"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Cadastros -->
+        <section id="panel-cadastros" class="adm-panel" hidden>
+          <div class="adm-card">
+            <div class="adm-card__header">
+              <h3>Novos prestadores (anunciar.html)</h3>
+            </div>
+            <div class="adm-card__body">
+              <div class="adm-table-scroll">
+                <table class="adm-table">
+                  <thead>
+                    <tr><th>Data</th><th>Empresa</th><th>Responsável</th><th>Profissão</th><th>Plano</th><th>Ações</th></tr>
+                  </thead>
+                  <tbody id="tbody-cadastros"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Pedidos -->
+        <section id="panel-pedidos" class="adm-panel" hidden>
+          <div class="adm-card">
+            <div class="adm-card__header">
+              <h3>Histórico de pagamentos</h3>
+            </div>
+            <div class="adm-card__body">
+              <div class="adm-table-scroll">
+                <table class="adm-table">
+                  <thead>
+                    <tr><th>Data</th><th>Plano</th><th>Valor</th><th>Status</th><th>Empresa</th></tr>
+                  </thead>
+                  <tbody id="tbody-pedidos"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal editar -->
+  <div id="modal-edit" class="adm-modal" hidden>
+    <div class="adm-modal__box">
+      <button type="button" class="adm-modal__close" id="modal-close" aria-label="Fechar">×</button>
+      <h2>Editar profissional</h2>
+      <form id="form-edit" class="adm-form-grid">
+        <input type="hidden" id="edit-id">
+        <div class="adm-field">
+          <label for="edit-nome">Nome / empresa</label>
+          <input type="text" id="edit-nome" required>
+        </div>
+        <div class="adm-form-grid adm-form-grid--2">
+          <div class="adm-field">
+            <label for="edit-categoria">Profissão</label>
+            <select id="edit-categoria"></select>
+          </div>
+          <div class="adm-field">
+            <label for="edit-nota">Nota (1–5)</label>
+            <input type="number" id="edit-nota" min="1" max="5" step="0.1">
+          </div>
+        </div>
+        <div class="adm-form-grid adm-form-grid--2">
+          <div class="adm-field">
+            <label for="edit-bairro">Bairro</label>
+            <input type="text" id="edit-bairro">
+          </div>
+          <div class="adm-field">
+            <label for="edit-whatsapp">WhatsApp</label>
+            <input type="tel" id="edit-whatsapp">
+          </div>
+        </div>
+        <div class="adm-field">
+          <label for="edit-descricao">Descrição do perfil</label>
+          <textarea id="edit-descricao" rows="3"></textarea>
+        </div>
+        <button type="submit" class="adm-btn adm-btn--primary">Salvar alterações</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="adm-toast-wrap" id="toast-wrap"></div>
+
+  <script src="js/config.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/prestadores-store.js"></script>
+  <script src="js/pagamentos.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

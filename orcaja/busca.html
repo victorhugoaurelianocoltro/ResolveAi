@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buscar profissional em São Paulo | ResolveAí</title>
+  <meta name="description" content="Busque eletricista, encanador, técnico em refrigeração, chaveiro ou dedetizador em São Paulo. Orçamento grátis com profissionais verificados.">
+  <link rel="canonical" href="https://resolveai.com.br/busca.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body data-page="busca">
+  <header class="header" role="banner">
+    <div class="container header__inner">
+      <a href="index.html" class="logo"><span class="logo__icon" aria-hidden="true">RA</span><span>ResolveAí</span></a>
+      <nav class="header__nav" aria-label="Menu">
+        <a href="index.html">Início</a>
+        <a href="busca.html" aria-current="page">Buscar</a>
+        <a href="anunciar.html">Para empresas</a>
+      </nav>
+      <a href="index.html#form-orcamento" class="btn btn--primary btn--sm">Orçamento grátis</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumb" id="breadcrumb" aria-label="Navegação">
+          <a href="index.html">Início</a>
+          <span aria-hidden="true">/</span>
+          <span>Buscar profissional</span>
+        </nav>
+        <h1 class="page-hero__title">Encontre o profissional certo em São Paulo</h1>
+        <p class="page-hero__subtitle">Escolha a profissão e a cidade. Em segundos você vê quem está disponível.</p>
+      </div>
+    </section>
+
+    <section class="section section--alt">
+      <div class="container container--narrow">
+        <form id="busca-form" class="search-card">
+          <div class="form-group">
+            <label for="profissao">Qual profissional você precisa?</label>
+            <select id="profissao" name="profissao" required></select>
+          </div>
+          <div class="form-group">
+            <label for="cidade-busca">Cidade</label>
+            <input type="text" id="cidade-busca" name="cidade" value="São Paulo" required data-places-city>
+          </div>
+          <button type="submit" class="btn btn--primary btn--lg">Buscar profissionais</button>
+          <button type="button" id="busca-preview" class="btn btn--ghost" style="width:100%;margin-top:var(--space-2);">Pré-visualizar resultados aqui</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="section" id="busca-resultados" hidden>
+      <div class="container">
+        <header class="section__header">
+          <h2 id="busca-result-title" class="section__title">Resultados</h2>
+          <p id="busca-result-sub" class="section__subtitle"></p>
+        </header>
+        <div id="busca-grid" class="providers-grid"></div>
+        <p style="text-align:center;margin-top:var(--space-8);">
+          <a id="link-categoria-completa" href="#" class="btn btn--secondary" style="display:none;">Ver página completa</a>
+        </p>
+      </div>
+    </section>
+
+    <section class="section section--alt">
+      <div class="container">
+        <header class="section__header">
+          <h2 class="section__title">Ou acesse direto por profissão</h2>
+        </header>
+        <div id="busca-categorias" class="category-chips"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom">
+        <p>&copy; 2026 ResolveAí · <a href="index.html">Voltar ao início</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="mobile-cta-bar">
+    <div class="mobile-cta-bar__text">
+      <strong>Orçamento grátis</strong>
+      <span>Resposta em minutos</span>
+    </div>
+    <a href="index.html#form-orcamento" class="btn btn--primary">Pedir agora</a>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/core.js"></script>
+  <script src="js/google-places.js"></script>
+  <script src="js/busca.js"></script>
+</body>
+</html>

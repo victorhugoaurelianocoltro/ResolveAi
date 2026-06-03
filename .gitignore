@@ -1,0 +1,26 @@
+﻿# Dependencias e segredos
+node_modules/
+.env
+.env.*
+!.env.example
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editores / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs e cache local
+*.log
+npm-debug.log*
+.cache/
+
+# Servidor local (opcional em producao)
+# orcaja/servidor-local.js permanece no repo para testes
+
+.tools/
