@@ -1,4 +1,4 @@
-﻿name: Publicar no GitHub Pages
+name: Publicar no GitHub Pages
 
 on:
   push:
@@ -6,32 +6,29 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 concurrency:
-  group: pages
+  group: gh-pages-deploy
   cancel-in-progress: true
 
 jobs:
   deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Configurar Pages
-        uses: actions/configure-pages@v5
+      - name: Garantir .nojekyll
+        run: touch orcaja/.nojekyll
 
-      - name: Enviar artefato (pasta orcaja)
-        uses: actions/upload-pages-artifact@v3
+      - name: Publicar pasta orcaja na branch gh-pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          path: orcaja
-
-      - name: Deploy
-        id: deployment
-        uses: actions/deploy-pages@v4
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./orcaja
+          publish_branch: gh-pages
+          force_orphan: true
+          user_name: github-actions[bot]
+          user_email: 41898282+github-actions[bot]@users.noreply.github.com
+          commit_message: Deploy ResolveAi (orcaja)
