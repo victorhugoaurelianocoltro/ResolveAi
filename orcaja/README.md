@@ -2,6 +2,10 @@
 
 Site de conversão para serviços urgentes em São Paulo.
 
+## Como visualizar (guia completo)
+
+**Leia primeiro:** **[COMO-VISUALIZAR.md](COMO-VISUALIZAR.md)** — URLs ao vivo, roteiro de cliques (Home → admin PIN 1234) e checklist de produção em `config.js`.
+
 ## Abrir o site
 
 **Recomendado:** duplo clique em `INICIAR-RESOLVEAI.bat` → **http://127.0.0.1:8080/index.html**

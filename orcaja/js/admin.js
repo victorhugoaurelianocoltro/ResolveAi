@@ -156,21 +156,77 @@
   }
 
   function seedDemoDataIfNeeded() {
-    if (loadJson('orcaja_leads').length) return;
-    saveJson('orcaja_leads', [
-      {
-        data: new Date().toISOString(),
-        nome: 'Maria Silva',
-        telefone: '11999887766',
-        cidade: 'São Paulo',
-        bairro: 'Vila Mariana',
-        servico: 'eletricista',
-        servicoLabel: 'Eletricista',
-        urgencia: 'Esta semana',
-        problema: 'Tomada com faísca na cozinha — lead de demonstração',
-        origem: 'demo',
-      },
-    ]);
+    const agora = new Date().toISOString();
+    const ontem = new Date(Date.now() - 86400000).toISOString();
+
+    if (!loadJson('orcaja_leads').length) {
+      saveJson('orcaja_leads', [
+        {
+          data: agora,
+          nome: 'Maria Silva',
+          telefone: '11999887766',
+          cidade: 'São Paulo',
+          bairro: 'Vila Mariana',
+          servico: 'eletricista',
+          servicoLabel: 'Eletricista',
+          urgencia: 'Preciso agora (urgente)',
+          problema: 'Tomada com faísca na cozinha — lead de demonstração',
+          origem: 'demo',
+        },
+      ]);
+    }
+
+    if (!loadJson('orcaja_cadastros').length) {
+      saveJson('orcaja_cadastros', [
+        {
+          criadoEm: ontem,
+          empresa: 'FrioRápido SP',
+          nome: 'André Costa',
+          whatsapp: '5511988877665',
+          profissao: 'tecnico-refrigeracao',
+          profissaoLabel: 'Técnico em refrigeração',
+          cidade: 'São Paulo',
+          planoInteresse: 'Destaque 30 dias',
+          origem: 'demo',
+        },
+        {
+          criadoEm: agora,
+          empresa: 'Chaveiro Express ZL',
+          nome: 'Paulo Mendes',
+          whatsapp: '5511977766554',
+          profissao: 'chaveiro',
+          profissaoLabel: 'Chaveiro',
+          cidade: 'São Paulo',
+          planoInteresse: 'Plano Profissional Mensal',
+          origem: 'demo',
+        },
+      ]);
+    }
+
+    if (!loadJson('orcaja_pedidos').length) {
+      saveJson('orcaja_pedidos', [
+        {
+          criadoEm: ontem,
+          planoId: 'destaque',
+          planoNome: 'Destaque 30 dias',
+          valor: 97,
+          status: 'pago_demo',
+          empresa: { empresa: 'EletroSP Urgente', nome: 'João Eletricista' },
+          modo: 'demo',
+          origem: 'demo',
+        },
+        {
+          criadoEm: agora,
+          planoId: 'mensal',
+          planoNome: 'Plano Profissional Mensal',
+          valor: 149,
+          status: 'pago_demo',
+          empresa: { empresa: 'Hidraulica Express', nome: 'Marcos Silva' },
+          modo: 'demo',
+          origem: 'demo',
+        },
+      ]);
+    }
   }
 
   /* ——— Stats ——— */

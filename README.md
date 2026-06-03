@@ -7,6 +7,7 @@ Site estático completo na pasta **[orcaja/](orcaja/)** — HTML, CSS e JavaScri
 | **Site ao vivo agora** | **https://raw.githack.com/victorhugoaurelianocoltro/ResolveAi/gh-pages/index.html** |
 | **Site oficial (GitHub Pages)** | https://victorhugoaurelianocoltro.github.io/ResolveAi/ *(ative em Settings → Pages)* |
 | **Repositório** | https://github.com/victorhugoaurelianocoltro/ResolveAi |
+| **Como visualizar (guia único)** | **[orcaja/COMO-VISUALIZAR.md](orcaja/COMO-VISUALIZAR.md)** |
 | **Documentação do MVP** | [orcaja/README.md](orcaja/README.md) |
 | **Deploy (Netlify, Vercel, Pages)** | [DEPLOY.md](DEPLOY.md) |
 
