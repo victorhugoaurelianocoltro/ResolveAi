@@ -112,11 +112,42 @@ const RESOLVEAI_CONFIG = {
 
   ai: {
     assistantName: 'Assistente ResolveAí',
+    tagline: 'Triagem inteligente · São Paulo e região metropolitana',
+    statusLabel: 'Online agora',
     enabled: true,
     /** Opcional: preencha para respostas via OpenAI (senão usa regras locais) */
     openaiApiKey: '',
+    typingDelayMs: 800,
+    typewriterEnabled: true,
+    showTimestamps: true,
+    minSendIntervalMs: 1200,
     welcomeHint:
       'Triagem grátis em ~30s, profissionais verificados na sua região e retorno no WhatsApp — sem app.',
+    disclaimer:
+      'Orientação e encaminhamento — não substitui emergência médica, incêndio ou risco imediato (ligue 190/192/193).',
+    suggestedQuestions: [
+      {
+        title: 'Eletricista urgente',
+        subtitle: 'Curto, queda de energia, tomada',
+        message: 'Preciso de eletricista urgente em São Paulo',
+      },
+      {
+        title: 'Como contratar',
+        subtitle: 'Triagem, WhatsApp, prazos',
+        message: 'Como contrato um profissional pelo ResolveAí?',
+      },
+      {
+        title: 'Falar com humano',
+        subtitle: 'Atendente no WhatsApp',
+        message: 'Quero falar com um atendente humano',
+      },
+    ],
+    quickChips: [
+      'Preciso de encanador agora',
+      'Quanto custa a triagem?',
+      'Atendem minha região em SP?',
+      'Como funciona?',
+    ],
   },
 
   atendimento: {

@@ -38,19 +38,29 @@
 
   <main class="ajuda-main" id="ajuda-app">
     <div class="ajuda-shell">
-      <header class="ajuda-header">
+      <header class="ajuda-header" aria-labelledby="assistant-name">
         <div class="ajuda-header__avatar" aria-hidden="true">
-          <span class="ajuda-header__monogram">RA</span>
-          <span class="ajuda-header__pulse"></span>
+          <span class="ajuda-header__monogram" id="assistant-monogram">RA</span>
+          <span class="ajuda-header__pulse" title="Online"></span>
         </div>
         <div class="ajuda-header__info">
           <h1 class="ajuda-header__title" id="assistant-name">Assistente ResolveAí</h1>
           <p class="ajuda-header__status">
-            <span class="live-pulse"><span class="live-pulse__dot"></span></span>
-            Online · triagem inteligente
+            <span class="live-pulse" aria-hidden="true"><span class="live-pulse__dot"></span></span>
+            <span id="assistant-status-label">Online</span>
           </p>
+          <p class="ajuda-header__tagline" id="assistant-tagline"></p>
         </div>
       </header>
+
+      <section
+        class="ajuda-welcome"
+        id="welcome-panel"
+        aria-label="Sugestões para começar"
+      >
+        <p class="ajuda-welcome__disclaimer" id="assistant-disclaimer"></p>
+        <div class="ajuda-welcome__cards" id="suggested-questions" role="list"></div>
+      </section>
 
       <div
         class="ajuda-messages"
@@ -58,47 +68,57 @@
         role="log"
         aria-live="polite"
         aria-relevant="additions"
+        aria-atomic="false"
         aria-label="Conversa com o assistente"
+        tabindex="-1"
       ></div>
 
-      <div class="ajuda-chips" id="quick-chips" role="group" aria-label="Sugestões rápidas">
-        <button type="button" class="ajuda-chip" data-chip="Preciso de eletricista urgente">Preciso de eletricista</button>
-        <button type="button" class="ajuda-chip" data-chip="Como funciona o ResolveAí?">Como funciona?</button>
-        <button type="button" class="ajuda-chip" data-chip="Quero falar com um atendente humano">Falar com humano</button>
+      <div class="ajuda-bottom" id="ajuda-bottom">
+        <div class="ajuda-chips" id="quick-chips" role="group" aria-label="Atalhos rápidos"></div>
+
+        <div class="ajuda-composer-wrap">
+          <form class="ajuda-composer" id="chat-form" novalidate>
+            <label class="visually-hidden" for="chat-input">Sua mensagem</label>
+            <button type="button" class="ajuda-mic" aria-hidden="true" tabindex="-1" disabled title="Em breve">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z" stroke="currentColor" stroke-width="2"/>
+                <path d="M19 10v2a7 7 0 01-14 0v-2M12 19v4M8 23h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </button>
+            <textarea
+              id="chat-input"
+              name="message"
+              rows="1"
+              placeholder="Descreva o problema ou tire uma dúvida…"
+              autocomplete="off"
+              maxlength="800"
+              aria-describedby="chat-hint"
+            ></textarea>
+            <button type="submit" class="ajuda-send btn btn--primary" aria-label="Enviar mensagem">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </form>
+          <p class="ajuda-composer__hint" id="chat-hint">Enter envia · Shift+Enter quebra linha</p>
+        </div>
+
+        <aside class="ajuda-actions" aria-label="Ações principais">
+          <a href="#" id="btn-humano" class="btn btn--secondary ajuda-actions__human" rel="noopener noreferrer" target="_blank">
+            Atendente humano
+          </a>
+          <a href="index.html#form-orcamento" class="btn btn--primary ajuda-actions__lead">
+            Triagem 30s — pedir profissional
+          </a>
+          <p class="ajuda-actions__horario" id="atendimento-horario"></p>
+        </aside>
       </div>
-
-      <form class="ajuda-composer" id="chat-form" novalidate>
-        <label class="visually-hidden" for="chat-input">Sua mensagem</label>
-        <textarea
-          id="chat-input"
-          name="message"
-          rows="1"
-          placeholder="Descreva o problema ou tire uma dúvida…"
-          autocomplete="off"
-          maxlength="800"
-        ></textarea>
-        <button type="submit" class="ajuda-send btn btn--primary" aria-label="Enviar mensagem">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
-      </form>
-
-      <aside class="ajuda-actions" aria-label="Ações principais">
-        <a href="#" id="btn-humano" class="btn btn--secondary ajuda-actions__human" rel="noopener noreferrer" target="_blank">
-          Falar com atendente humano
-        </a>
-        <a href="index.html#form-orcamento" class="btn btn--primary ajuda-actions__lead">
-          Pedir profissional agora
-        </a>
-        <p class="ajuda-actions__horario" id="atendimento-horario"></p>
-      </aside>
     </div>
   </main>
 
   <footer class="footer footer--minimal" role="contentinfo">
     <div class="container footer__bottom" style="border: none; padding-top: var(--space-4);">
-      <p>&copy; 2026 ResolveAí · <a href="index.html">Home</a> · <a href="mailto:contato@resolveai.com.br" id="footer-email">contato@resolveai.com.br</a></p>
+      <p>&copy; 2026 ResolveAí · <a href="index.html">Home</a> · <a href="busca.html">Buscar</a> · <a href="mailto:contato@resolveai.com.br" id="footer-email">contato@resolveai.com.br</a></p>
     </div>
   </footer>
 
