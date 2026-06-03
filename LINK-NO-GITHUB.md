@@ -20,8 +20,14 @@
 
 Qualquer pessoa que abrir o repositório verá o link do site em **Sobre**.
 
-## Link para copiar
+## Links para copiar
 
+**Funciona agora (cole na engrenagem ⚙️ do Sobre):**
+```
+https://raw.githack.com/victorhugoaurelianocoltro/ResolveAi/gh-pages/index.html
+```
+
+**Oficial (depois do Passo 1):**
 ```
 https://victorhugoaurelianocoltro.github.io/ResolveAi/
 ```
