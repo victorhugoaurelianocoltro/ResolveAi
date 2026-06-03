@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /checkout-sucesso.html
+Disallow: /sucesso.html
+
+Sitemap: https://resolveai.com.br/sitemap.xml

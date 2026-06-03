@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Pedido enviado | ResolveAí</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <style>
+    .success-page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-8);
+      text-align: center;
+    }
+    .success-card {
+      max-width: 480px;
+      background: var(--color-surface);
+      padding: var(--space-10);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-lg);
+    }
+    .success-icon {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto var(--space-6);
+      background: var(--color-accent-soft);
+      color: var(--color-primary-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+    }
+    .success-card h1 {
+      font-family: var(--font-display);
+      color: var(--color-text);
+      margin-bottom: var(--space-4);
+    }
+    .success-card p { color: var(--color-text-muted); margin-bottom: var(--space-6); line-height: 1.7; }
+    .success-actions { display: flex; flex-direction: column; gap: var(--space-3); }
+    .success-admin {
+      margin-top: var(--space-6);
+      padding-top: var(--space-6);
+      border-top: 1px solid var(--color-border);
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+    }
+  </style>
+</head>
+<body style="padding-bottom: 0;">
+  <main class="success-page">
+    <div class="success-card">
+      <div class="success-icon" aria-hidden="true">✓</div>
+      <h1>Pedido recebido!</h1>
+      <p id="success-msg">Profissionais verificados em São Paulo já foram avisados. Aguarde contato em breve.</p>
+      <div class="success-actions">
+        <a href="busca.html" class="btn btn--secondary btn--lg">Ver profissionais</a>
+        <a href="index.html" class="btn btn--primary btn--lg">Voltar ao início</a>
+      </div>
+      <div id="admin-notify" class="success-admin" hidden>
+        <p>Dono do site: notifique a equipe sobre este lead</p>
+        <a id="btn-admin-wa" href="#" class="btn btn--whatsapp btn--sm" target="_blank" rel="noopener" style="margin-top:var(--space-2);">Enviar lead no WhatsApp</a>
+        <a id="btn-admin-email" href="#" class="btn btn--ghost btn--sm" style="margin-top:var(--space-2);">Enviar por e-mail</a>
+      </div>
+    </div>
+  </main>
+  <script src="js/config.js"></script>
+  <script src="js/pagamentos.js"></script>
+  <script>
+    const params = new URLSearchParams(location.search);
+    const nome = params.get('nome');
+    const servico = params.get('servico');
+    const cidade = params.get('cidade');
+    const bairro = params.get('bairro');
+    const problema = params.get('problema');
+    if (nome && servico) {
+      let msg = `${nome}, seu pedido de ${servico} em ${cidade || 'São Paulo'}`;
+      if (bairro) msg += ` (${bairro})`;
+      msg += ' foi registrado.';
+      if (problema) msg += ` Situação: “${problema}”.`;
+      msg += ' Profissionais verificados devem entrar em contato em até 15 minutos pelo WhatsApp ou telefone que você informou.';
+      document.getElementById('success-msg').textContent = msg;
+    }
+
+    const isAdmin = new URLSearchParams(location.search).get('admin') === '1' || localStorage.getItem('orcaja_admin') === '1';
+
+    try {
+      const raw = sessionStorage.getItem('orcaja_last_lead_notify');
+      if (raw && isAdmin) {
+        const n = JSON.parse(raw);
+        const box = document.getElementById('admin-notify');
+        if (box && (n.wa || n.mailto)) {
+          box.hidden = false;
+          if (n.wa) document.getElementById('btn-admin-wa').href = n.wa;
+          else document.getElementById('btn-admin-wa').hidden = true;
+          if (n.mailto) document.getElementById('btn-admin-email').href = n.mailto;
+          else document.getElementById('btn-admin-email').hidden = true;
+        }
+        sessionStorage.removeItem('orcaja_last_lead_notify');
+      }
+    } catch (e) {}
+  </script>
+</body>
+</html>

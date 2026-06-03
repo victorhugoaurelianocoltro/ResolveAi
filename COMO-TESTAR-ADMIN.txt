@@ -1,0 +1,35 @@
+COMO TESTAR O PAINEL ADMIN — ResolveAí
+========================================
+
+PIN padrao: 1234 (altere em js/config.js → admin.pin)
+
+OPCAO 1 — RECOMENDADA (servidor local)
+--------------------------------------
+1. Abra a pasta "orcaja" no Explorer
+2. Duplo clique em INICIAR-RESOLVEAI.bat
+3. O navegador abre:
+   - Site:  http://127.0.0.1:8080/index.html
+   - Admin: http://127.0.0.1:8080/admin.html
+4. Digite o PIN 1234 no admin
+
+OPCAO 2 — Live Server no Cursor
+---------------------------------
+1. Abra a pasta orcaja no Cursor
+2. Clique direito em admin.html → "Open with Live Server"
+3. URL sera algo como http://127.0.0.1:5500/admin.html
+4. PIN: 1234
+
+OPCAO 3 — Node manual
+---------------------
+1. Abra o terminal na pasta orcaja
+2. node servidor-local.js
+3. Acesse http://127.0.0.1:8080/admin.html
+
+IMPORTANTE
+----------
+- Nao abra admin.html como file:/// — localStorage e scripts podem falhar
+- Chaves localStorage mantidas como orcaja_* (dados de teste preservados)
+- INICIAR-ORCAJA.bat ainda funciona; prefira INICIAR-RESOLVEAI.bat
+
+Caminho completo exemplo:
+  ...\site para fazer dinheiro\orcaja\admin.html

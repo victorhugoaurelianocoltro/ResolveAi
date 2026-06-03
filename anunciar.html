@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anuncie sua empresa em São Paulo | ResolveAí</title>
+  <meta name="description" content="Apareça primeiro para clientes urgentes em São Paulo. Planos Destaque, mensal e pacote de leads. Pagamento via Stripe.">
+  <link rel="canonical" href="https://resolveai.com.br/anunciar.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body data-page="anunciar">
+  <header class="header">
+    <div class="container header__inner">
+      <a href="index.html" class="logo"><span class="logo__icon">RA</span><span>ResolveAí</span></a>
+      <nav class="header__nav">
+        <a href="index.html">Início</a>
+        <a href="busca.html">Buscar</a>
+        <a href="anunciar.html" aria-current="page">Anunciar</a>
+      </nav>
+      <a href="#cadastro-prestador" class="btn btn--primary btn--sm">Começar grátis</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Navegação">
+          <a href="index.html">Início</a><span aria-hidden="true">/</span><span>Anunciar empresa</span>
+        </nav>
+        <h1 class="page-hero__title">Apareça quando alguém precisa AGORA</h1>
+        <p class="page-hero__subtitle">Moradores de São Paulo pedem ajuda urgente pelo ResolveAí. Destaque seu perfil e receba leads qualificados no WhatsApp.</p>
+        <p id="stripe-hint" class="page-hero__meta"></p>
+      </div>
+    </section>
+
+    <section class="section section--alt">
+      <div class="container">
+        <header class="section__header">
+          <h2 class="section__title">Escolha seu plano</h2>
+          <p class="section__subtitle">Pagamento online · Ativação rápida após confirmação</p>
+        </header>
+        <div id="planos-grid" class="pricing-grid"></div>
+      </div>
+    </section>
+
+    <section class="section" id="cadastro-prestador">
+      <div class="container container--narrow">
+        <header class="section__header">
+          <h2 class="section__title">Cadastre sua empresa</h2>
+          <p class="section__subtitle">Grátis para listar. Planos pagos colocam você no topo.</p>
+        </header>
+        <form id="cadastro-prestador" class="search-card">
+          <div class="form-group">
+            <label for="cad-empresa">Nome da empresa / marca</label>
+            <input type="text" id="cad-empresa" required placeholder="Ex.: EletroSP Urgente">
+          </div>
+          <div class="form-group">
+            <label for="cad-nome">Seu nome</label>
+            <input type="text" id="cad-nome" required>
+          </div>
+          <div class="form-group">
+            <label for="cad-whatsapp">WhatsApp comercial</label>
+            <input type="tel" id="cad-whatsapp" required placeholder="(11) 99999-9999">
+          </div>
+          <div class="form-group">
+            <label for="cad-profissao">Profissão</label>
+            <select id="cad-profissao" required></select>
+          </div>
+          <div class="form-group">
+            <label for="cad-cidade">Cidade de atuação</label>
+            <input type="text" id="cad-cidade" value="São Paulo" required>
+          </div>
+          <div class="form-group">
+            <label for="cad-plano">Plano de interesse</label>
+            <select id="cad-plano">
+              <option value="destaque">Destaque 30 dias — R$ 97</option>
+              <option value="mensal">Plano mensal — R$ 149</option>
+              <option value="leads">Pacote 10 leads — R$ 190</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn--primary btn--lg">Continuar para pagamento</button>
+          <p class="form-hint" style="text-align:center;margin-top:var(--space-3);">Ao enviar, você será direcionado ao checkout. Também notificamos nossa equipe.</p>
+        </form>
+      </div>
+    </section>
+
+    <section class="section section--alt">
+      <div class="container">
+        <div class="cta-prestador" style="margin:0;">
+          <h2>Dúvidas sobre anúncio?</h2>
+          <p>Fale com nossa equipe no WhatsApp antes de contratar.</p>
+          <a id="link-wa-comercial" href="#" class="btn btn--whatsapp btn--lg" target="_blank" rel="noopener">WhatsApp comercial</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><div class="container"><div class="footer__bottom"><p>&copy; 2026 ResolveAí</p></div></div></footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/core.js"></script>
+  <script src="js/pagamentos.js"></script>
+  <script src="js/anunciar.js"></script>
+  <script>
+    (function () {
+      const cfg = typeof ORCAJA_CONFIG !== 'undefined' ? ORCAJA_CONFIG : {};
+      const num = (cfg.whatsappAdmin || '').replace(/\D/g, '');
+      if (num) {
+        const el = document.getElementById('link-wa-comercial');
+        if (el) el.href = 'https://wa.me/' + num + '?text=' + encodeURIComponent('Olá! Quero anunciar minha empresa no ResolveAí.');
+      }
+    })();
+  </script>
+</body>
+</html>

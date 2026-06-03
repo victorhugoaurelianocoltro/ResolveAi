@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil do profissional | ResolveAí</title>
+  <meta name="description" content="Perfil verificado no ResolveAí. Veja avaliações, serviços e fale direto no WhatsApp.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" id="canonical-link" href="https://resolveai.com.br/prestador.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body data-page="prestador">
+  <header class="header" role="banner">
+    <div class="container header__inner">
+      <a href="index.html" class="logo"><span class="logo__icon" aria-hidden="true">RA</span><span>ResolveAí</span></a>
+      <nav class="header__nav" aria-label="Menu">
+        <a href="index.html">Início</a>
+        <a href="busca.html">Buscar</a>
+        <a href="anunciar.html">Para empresas</a>
+      </nav>
+      <a href="index.html#form-orcamento" class="btn btn--primary btn--sm">Orçamento grátis</a>
+    </div>
+  </header>
+
+  <main id="profile-main">
+    <section class="profile-hero">
+      <div class="container">
+        <nav class="breadcrumb" id="breadcrumb" aria-label="Navegação"></nav>
+        <div class="profile-hero__grid">
+          <div class="profile-avatar" id="profile-avatar" aria-hidden="true">?</div>
+          <div>
+            <div id="profile-badges" style="margin-bottom:var(--space-3);"></div>
+            <h1 id="profile-name" class="profile-hero__title">Carregando…</h1>
+            <p id="profile-profissao" class="profile-hero__profissao"></p>
+            <div class="provider-card__rating" id="profile-rating"></div>
+            <div class="profile-stats" id="profile-stats"></div>
+            <div class="profile-cta-box">
+              <a id="btn-wa-hero" href="#" class="btn btn--whatsapp btn--lg" target="_blank" rel="noopener noreferrer">Chamar no WhatsApp</a>
+              <a id="btn-orcamento-hero" href="#" class="btn btn--primary btn--lg">Pedir orçamento grátis</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="profile-section">
+      <div class="container profile-layout">
+        <div>
+          <h2 class="inline-form-title" style="text-align:left;">Sobre o profissional</h2>
+          <p id="profile-desc" class="profile-desc"></p>
+
+          <h2 class="inline-form-title" style="text-align:left;margin-top:var(--space-8);">Trabalhos que realiza</h2>
+          <ul id="profile-servicos" class="profile-servicos"></ul>
+
+          <div id="profile-google-block" class="profile-google-block" hidden></div>
+          <div id="profile-map" class="profile-map" hidden></div>
+
+          <div class="profile-wa-form" style="margin-top:var(--space-10);">
+            <h2>Personalize sua mensagem no WhatsApp</h2>
+            <p class="form-hint" style="margin-bottom:var(--space-4);">Quanto mais claro o pedido, mais rápido o orçamento.</p>
+            <div class="form-group">
+              <label for="wa-cidade">Sua cidade</label>
+              <input type="text" id="wa-cidade" value="São Paulo">
+            </div>
+            <div class="form-group">
+              <label for="wa-bairro">Bairro (opcional)</label>
+              <input type="text" id="wa-bairro" placeholder="Ex.: Pinheiros">
+            </div>
+            <div class="form-group">
+              <label for="wa-problema">Descreva o que precisa</label>
+              <textarea id="wa-problema" rows="3" placeholder="Ex.: tomada queimou, preciso trocar hoje"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="wa-urgencia">Urgência</label>
+              <select id="wa-urgencia"></select>
+            </div>
+            <a id="btn-wa-custom" href="#" class="btn btn--whatsapp btn--lg" target="_blank" rel="noopener noreferrer" style="width:100%;">
+              Enviar mensagem no WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <aside>
+          <h2 class="profile-sidebar-title">Outros na mesma área</h2>
+          <div id="profile-related"></div>
+          <p style="margin-top:var(--space-6);">
+            <a id="link-categoria" href="busca.html" class="btn btn--secondary" style="width:100%;">Ver todos</a>
+          </p>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <div id="profile-not-found" class="section" hidden>
+    <div class="container empty-state">
+      <h2>Profissional não encontrado</h2>
+      <p>O perfil pode ter sido removido ou o link está incorreto.</p>
+      <a href="busca.html" class="btn btn--primary">Buscar profissionais</a>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom">
+        <p>&copy; 2026 ResolveAí · <a href="index.html">Início</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="mobile-cta-bar mobile-wa-bar" id="mobile-wa-bar" hidden>
+    <a id="btn-wa-mobile" href="#" class="btn btn--whatsapp">WhatsApp agora</a>
+    <a id="btn-orc-mobile" href="#" class="btn btn--primary">Orçamento</a>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/core.js"></script>
+  <script src="js/google-places.js"></script>
+  <script src="js/prestador.js"></script>
+</body>
+</html>

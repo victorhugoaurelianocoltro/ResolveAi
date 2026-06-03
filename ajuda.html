@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Assistente ResolveAí — Ajuda urgente em São Paulo</title>
+  <meta name="description" content="Converse com o Assistente ResolveAí: tire dúvidas sobre emergências em casa, eletricista, encanador e peça profissional verificado. Atendente humano no WhatsApp.">
+  <link rel="canonical" href="https://resolveai.com.br/ajuda.html">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <meta property="og:title" content="Assistente ResolveAí — Ajuda em minutos">
+  <meta property="og:description" content="IA de triagem + atendente humano. Emergência doméstica em São Paulo sem app.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body class="page-ajuda" data-page="ajuda">
+  <header class="header header--compact" role="banner">
+    <div class="container header__inner">
+      <a href="index.html" class="logo" aria-label="ResolveAí — Página inicial">
+        <span class="logo__icon" aria-hidden="true">RA</span>
+        <span>ResolveAí</span>
+      </a>
+      <nav class="header__nav" aria-label="Menu principal">
+        <a href="index.html">Início</a>
+        <a href="busca.html">Buscar</a>
+        <a href="index.html#form-orcamento">Triagem 30s</a>
+        <a href="anunciar.html">Para empresas</a>
+      </nav>
+      <a href="index.html#form-orcamento" class="btn btn--secondary btn--sm hide-mobile">Triagem rápida</a>
+    </div>
+  </header>
+
+  <main class="ajuda-main" id="ajuda-app">
+    <div class="ajuda-shell">
+      <header class="ajuda-header" aria-labelledby="assistant-name">
+        <div class="ajuda-header__avatar" aria-hidden="true">
+          <span class="ajuda-header__monogram" id="assistant-monogram">RA</span>
+          <span class="ajuda-header__pulse" title="Online"></span>
+        </div>
+        <div class="ajuda-header__info">
+          <h1 class="ajuda-header__title" id="assistant-name">Assistente ResolveAí</h1>
+          <p class="ajuda-header__status">
+            <span class="live-pulse" aria-hidden="true"><span class="live-pulse__dot"></span></span>
+            <span id="assistant-status-label">Online</span>
+          </p>
+          <p class="ajuda-header__tagline" id="assistant-tagline"></p>
+        </div>
+      </header>
+
+      <section
+        class="ajuda-welcome"
+        id="welcome-panel"
+        aria-label="Sugestões para começar"
+      >
+        <p class="ajuda-welcome__disclaimer" id="assistant-disclaimer"></p>
+        <div class="ajuda-welcome__cards" id="suggested-questions" role="list"></div>
+      </section>
+
+      <div
+        class="ajuda-messages"
+        id="chat-messages"
+        role="log"
+        aria-live="polite"
+        aria-relevant="additions"
+        aria-atomic="false"
+        aria-label="Conversa com o assistente"
+        tabindex="-1"
+      ></div>
+
+      <div class="ajuda-bottom" id="ajuda-bottom">
+        <div class="ajuda-chips" id="quick-chips" role="group" aria-label="Atalhos rápidos"></div>
+
+        <div class="ajuda-composer-wrap">
+          <form class="ajuda-composer" id="chat-form" novalidate>
+            <label class="visually-hidden" for="chat-input">Sua mensagem</label>
+            <button type="button" class="ajuda-mic" aria-hidden="true" tabindex="-1" disabled title="Em breve">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z" stroke="currentColor" stroke-width="2"/>
+                <path d="M19 10v2a7 7 0 01-14 0v-2M12 19v4M8 23h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </button>
+            <textarea
+              id="chat-input"
+              name="message"
+              rows="1"
+              placeholder="Descreva o problema ou tire uma dúvida…"
+              autocomplete="off"
+              maxlength="800"
+              aria-describedby="chat-hint"
+            ></textarea>
+            <button type="submit" class="ajuda-send btn btn--primary" aria-label="Enviar mensagem">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </form>
+          <p class="ajuda-composer__hint" id="chat-hint">Enter envia · Shift+Enter quebra linha</p>
+        </div>
+
+        <aside class="ajuda-actions" aria-label="Ações principais">
+          <a href="#" id="btn-humano" class="btn btn--secondary ajuda-actions__human" rel="noopener noreferrer" target="_blank">
+            Atendente humano
+          </a>
+          <a href="index.html#form-orcamento" class="btn btn--primary ajuda-actions__lead">
+            Triagem 30s — pedir profissional
+          </a>
+          <p class="ajuda-actions__horario" id="atendimento-horario"></p>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer footer--minimal" role="contentinfo">
+    <div class="container footer__bottom" style="border: none; padding-top: var(--space-4);">
+      <p>&copy; 2026 ResolveAí · <a href="index.html">Home</a> · <a href="busca.html">Buscar</a> · <a href="mailto:contato@resolveai.com.br" id="footer-email">contato@resolveai.com.br</a></p>
+    </div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/pagamentos.js"></script>
+  <script src="js/ajuda.js"></script>
+</body>
+</html>

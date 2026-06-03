@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pagamento confirmado | ResolveAí</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <style>
+    .success-page { min-height: 80vh; display: flex; align-items: center; justify-content: center; padding: var(--space-8); }
+    .success-card { max-width: 520px; background: var(--color-surface); padding: var(--space-10); border-radius: var(--radius-xl); box-shadow: var(--shadow-lg); text-align: center; }
+    .success-icon { width: 72px; height: 72px; margin: 0 auto var(--space-6); background: var(--color-accent-soft); color: var(--color-primary-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; }
+    .success-card h1 { font-family: var(--font-display); color: var(--color-text); margin-bottom: var(--space-4); }
+    .success-card p { color: var(--color-text-muted); margin-bottom: var(--space-6); line-height: 1.7; }
+    .success-actions { display: flex; flex-direction: column; gap: var(--space-3); }
+  </style>
+</head>
+<body style="padding-bottom:0;">
+  <main class="success-page">
+    <div class="success-card">
+      <div class="success-icon" aria-hidden="true">✓</div>
+      <h1 id="titulo">Pagamento recebido!</h1>
+      <p id="mensagem">Estamos ativando seu plano. Em até 24h seu perfil aparece em destaque.</p>
+      <div class="success-actions">
+        <a id="btn-wa-suporte" href="#" class="btn btn--whatsapp btn--lg" target="_blank" rel="noopener">Falar com suporte no WhatsApp</a>
+        <a href="anunciar.html" class="btn btn--secondary">Ver outros planos</a>
+        <a href="index.html" class="btn btn--ghost">Ir para o site</a>
+      </div>
+    </div>
+  </main>
+  <script src="js/config.js"></script>
+  <script src="js/pagamentos.js"></script>
+  <script>
+    (function () {
+      const params = new URLSearchParams(location.search);
+      const plano = params.get('plano') || 'destaque';
+      const empresa = params.get('empresa') || '';
+      const demo = params.get('demo');
+      const cfg = typeof ORCAJA_CONFIG !== 'undefined' ? ORCAJA_CONFIG : {};
+      const planoCfg = cfg.planos && cfg.planos[plano];
+      const nomePlano = planoCfg ? planoCfg.nome : plano;
+
+      document.getElementById('titulo').textContent = demo ? 'Pagamento simulado com sucesso!' : 'Pagamento confirmado!';
+      document.getElementById('mensagem').textContent = empresa
+        ? `${empresa}, seu plano *${nomePlano}* será ativado em breve. Nossa equipe pode entrar em contato no WhatsApp cadastrado.`
+        : `Seu plano *${nomePlano}* será ativado em breve. Guarde este comprovante.`;
+
+      const num = (cfg.whatsappAdmin || '').replace(/\D/g, '');
+      if (num) {
+        const msg = encodeURIComponent(
+          `Olá! Acabei de contratar o plano ${nomePlano} no ResolveAí.${empresa ? ` Empresa: ${empresa}` : ''}${demo ? ' (teste demo)' : ''}`
+        );
+        document.getElementById('btn-wa-suporte').href = 'https://wa.me/' + num + '?text=' + msg;
+      }
+
+      if (!demo && typeof OrcajaPagamentos !== 'undefined') {
+        OrcajaPagamentos.salvarPedido({
+          planoId: plano,
+          planoNome: nomePlano,
+          status: 'pago_stripe_retorno',
+          empresa: { empresa },
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
