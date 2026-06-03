@@ -9,11 +9,15 @@ Site estático completo na pasta **[orcaja/](orcaja/)** — HTML, CSS e JavaScri
 | **Documentação do MVP** | [orcaja/README.md](orcaja/README.md) |
 | **Deploy (Netlify, Vercel, Pages)** | [DEPLOY.md](DEPLOY.md) |
 
-## Primeira publicação no GitHub Pages
+## Ativar o link público (faça uma vez)
 
-1. Faça push da branch `main` (este repositório).
-2. No GitHub: **Settings → Pages → Build and deployment → Source** = **GitHub Actions**.
-3. O workflow [.github/workflows/deploy-pages.yml](.github/workflows/deploy-pages.yml) publica a pasta `orcaja/` a cada push.
+1. **Settings → Pages:** https://github.com/victorhugoaurelianocoltro/ResolveAi/settings/pages  
+   → **Deploy from a branch** → branch **`gh-pages`** → **`/ (root)`** → **Save**
+2. **Sobre → ⚙️** na página do repo → campo **Website:** `https://victorhugoaurelianocoltro.github.io/ResolveAi/`
+
+Guia com prints: [LINK-NO-GITHUB.md](LINK-NO-GITHUB.md)
+
+O workflow [.github/workflows/deploy-pages.yml](.github/workflows/deploy-pages.yml) atualiza a branch `gh-pages` a cada push na `main`.
 
 Links internos do site usam caminhos **relativos** (compatível com o subcaminho `/ResolveAi/` no Pages).
 
