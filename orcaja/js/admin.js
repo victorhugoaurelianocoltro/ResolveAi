@@ -111,14 +111,27 @@
   }
 
   function showApp() {
-    $('adm-login').setAttribute('hidden', '');
-    $('adm-app').removeAttribute('hidden');
+    const loginEl = $('adm-login');
+    const appEl = $('adm-app');
+    if (loginEl) loginEl.setAttribute('hidden', '');
+    if (appEl) appEl.removeAttribute('hidden');
+    document.body.classList.add('is-adm-authed');
+    document.body.classList.remove('is-adm-login');
+    goToPanel('dashboard');
     renderAll();
   }
 
   function showLogin() {
-    $('adm-login').removeAttribute('hidden');
-    $('adm-app').setAttribute('hidden', '');
+    const loginEl = $('adm-login');
+    const appEl = $('adm-app');
+    if (loginEl) loginEl.removeAttribute('hidden');
+    if (appEl) appEl.setAttribute('hidden', '');
+    document.body.classList.remove('is-adm-authed');
+    document.body.classList.add('is-adm-login');
+    const pinInput = $('admin-pin');
+    if (pinInput) pinInput.value = '';
+    const err = $('login-error');
+    if (err) err.setAttribute('hidden', '');
   }
 
   function login(pin) {
@@ -135,8 +148,29 @@
 
   function logout() {
     sessionStorage.removeItem(AUTH_KEY);
+    try {
+      localStorage.removeItem('orcaja_admin');
+    } catch (e) {}
     showLogin();
     toast('Sessão encerrada');
+  }
+
+  function seedDemoDataIfNeeded() {
+    if (loadJson('orcaja_leads').length) return;
+    saveJson('orcaja_leads', [
+      {
+        data: new Date().toISOString(),
+        nome: 'Maria Silva',
+        telefone: '11999887766',
+        cidade: 'São Paulo',
+        bairro: 'Vila Mariana',
+        servico: 'eletricista',
+        servicoLabel: 'Eletricista',
+        urgencia: 'Esta semana',
+        problema: 'Tomada com faísca na cozinha — lead de demonstração',
+        origem: 'demo',
+      },
+    ]);
   }
 
   /* ——— Stats ——— */
@@ -607,9 +641,13 @@
 
     fillCategoriaSelect($('edit-categoria'));
     initNav();
+    seedDemoDataIfNeeded();
 
-    if (checkAuth()) showApp();
-    else showLogin();
+    if (checkAuth()) {
+      showApp();
+    } else {
+      showLogin();
+    }
   }
 
   if (document.readyState === 'loading') {

@@ -19,6 +19,10 @@
 
 * { box-sizing: border-box; }
 
+[hidden] {
+  display: none !important;
+}
+
 body.adm-body {
   margin: 0;
   font-family: 'DM Sans', system-ui, sans-serif;
@@ -309,7 +313,7 @@ body.adm-body {
   min-height: 100vh;
 }
 
-.adm-app[hidden] {
+.adm-login-wrap[hidden] {
   display: none !important;
 }
 
