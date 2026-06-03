@@ -147,7 +147,21 @@
     renderBreadcrumb(p);
     injectSchema(p);
 
-    $('#profile-avatar').textContent = C.initials(p.nome);
+    const avatarEl = $('#profile-avatar');
+    if (avatarEl) {
+      const fotoSrc = C.getPrestadorFoto ? C.getPrestadorFoto(p) : null;
+      avatarEl.innerHTML = '';
+      if (fotoSrc) {
+        const img = document.createElement('img');
+        img.src = fotoSrc;
+        img.alt = p.nome || '';
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        avatarEl.appendChild(img);
+      } else {
+        avatarEl.textContent = C.initials(p.nome);
+      }
+    }
     $('#profile-name').textContent = p.nome;
     $('#profile-profissao').textContent = `${profissao} · ${p.bairro}, ${p.cidade}`;
 

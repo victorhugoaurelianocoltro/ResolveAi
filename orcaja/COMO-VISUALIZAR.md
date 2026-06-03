@@ -59,7 +59,7 @@ Detalhes com prints: [LINK-NO-GITHUB.md](../LINK-NO-GITHUB.md) (na raiz do repos
 | Menu | Conteúdo de demo |
 |------|------------------|
 | **Dashboard** | KPIs + últimos leads |
-| **Prestadores** | 10 do `data.js` — busca, editar, selos Verificado/Destaque |
+| **Prestadores** | 10 do `data.js` — busca, editar (incl. **foto de perfil** por upload ou URL), selos Verificado/Destaque |
 | **Leads** | Lead “Maria Silva” + leads que você criar no site |
 | **Cadastros** | FrioRápido SP e Chaveiro Express — botões **Aprovar** / **+ Destaque** |
 | **Pagamentos** | Dois pedidos `pago_demo` (Destaque e Mensal) |

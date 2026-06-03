@@ -223,6 +223,22 @@
             <input type="tel" id="edit-whatsapp">
           </div>
         </div>
+        <div class="adm-field adm-foto-field">
+          <span class="adm-label">Foto de perfil</span>
+          <div class="adm-foto-row">
+            <div class="adm-foto-preview" id="edit-foto-preview" aria-hidden="true">?</div>
+            <div class="adm-foto-actions">
+              <input type="file" id="edit-foto-file" accept="image/jpeg,image/png,image/webp" hidden>
+              <div class="adm-foto-btns">
+                <button type="button" class="adm-btn adm-btn--outline adm-btn--sm" id="edit-foto-choose">Escolher imagem</button>
+                <button type="button" class="adm-btn adm-btn--outline adm-btn--sm" id="edit-foto-remove" hidden>Remover foto</button>
+              </div>
+              <p class="adm-foto-hint">JPG, PNG ou WebP · comprimido automaticamente (máx. ~400 KB)</p>
+              <label for="edit-foto-url" class="adm-foto-url-label">Ou URL externa</label>
+              <input type="url" id="edit-foto-url" class="adm-input" placeholder="https://exemplo.com/foto.jpg" autocomplete="off">
+            </div>
+          </div>
+        </div>
         <div class="adm-field">
           <label for="edit-descricao">Descrição do perfil</label>
           <textarea id="edit-descricao" rows="3"></textarea>
@@ -237,6 +253,7 @@
   <script src="js/config.js"></script>
   <script src="js/data.js"></script>
   <script src="js/prestadores-store.js"></script>
+  <script src="js/foto-prestador.js"></script>
   <script src="js/pagamentos.js"></script>
   <script src="js/admin.js"></script>
 </body>

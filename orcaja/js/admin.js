@@ -7,6 +7,7 @@
   const cfg = typeof ORCAJA_CONFIG !== 'undefined' ? ORCAJA_CONFIG : { admin: { pin: '1234' }, categorias: [] };
   const Store = window.OrcajaPrestadoresStore;
   const P = window.OrcajaPagamentos;
+  const FotoUtil = window.OrcajaFotoPrestador;
 
   const AUTH_KEY = 'orcaja_admin_auth';
   const TITLES = {
@@ -103,6 +104,81 @@
       })
       .join('')
       .toUpperCase();
+  }
+
+  function escapeAttr(str) {
+    return String(str || '')
+      .replace(/&/g, '&amp;')
+      .replace(/"/g, '&quot;')
+      .replace(/</g, '&lt;');
+  }
+
+  function getPrestadorFotoSrc(p) {
+    if (!p) return null;
+    const src = (p.foto && String(p.foto).trim()) || (p.fotoUrl && String(p.fotoUrl).trim());
+    if (!src) return null;
+    if (p.fotoUrl && src === String(p.fotoUrl).trim() && !/^https?:\/\//i.test(src)) {
+      return null;
+    }
+    return src;
+  }
+
+  /** undefined = sem alteração; string vazia = remove; string = novo base64 */
+  var editFotoPending;
+  var editModalPrestador;
+
+  function admAvatarHtml(p) {
+    const src = getPrestadorFotoSrc(p);
+    if (src) {
+      return (
+        '<span class="adm-avatar"><img src="' +
+        escapeAttr(src) +
+        '" alt="' +
+        escapeAttr(p.nome || '') +
+        '"></span>'
+      );
+    }
+    return '<span class="adm-avatar">' + initials(p.nome) + '</span>';
+  }
+
+  function getEditFotoPreviewSrc() {
+    if (editFotoPending !== undefined) {
+      return editFotoPending || null;
+    }
+    const urlEl = $('edit-foto-url');
+    const urlVal = urlEl ? urlEl.value.trim() : '';
+    if (urlVal && /^https?:\/\//i.test(urlVal)) return urlVal;
+    return editModalPrestador ? getPrestadorFotoSrc(editModalPrestador) : null;
+  }
+
+  function renderEditFotoPreview() {
+    const el = $('edit-foto-preview');
+    const removeBtn = $('edit-foto-remove');
+    if (!el) return;
+
+    const nome =
+      ($('edit-nome') && $('edit-nome').value.trim()) ||
+      (editModalPrestador && editModalPrestador.nome) ||
+      '?';
+    const src = getEditFotoPreviewSrc();
+
+    el.innerHTML = '';
+    if (src) {
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = nome;
+      el.appendChild(img);
+      if (removeBtn) removeBtn.removeAttribute('hidden');
+    } else {
+      el.textContent = initials(nome);
+      if (removeBtn) {
+        if (editFotoPending !== undefined || (editModalPrestador && getPrestadorFotoSrc(editModalPrestador))) {
+          removeBtn.removeAttribute('hidden');
+        } else {
+          removeBtn.setAttribute('hidden', '');
+        }
+      }
+    }
   }
 
   /* ——— Auth ——— */
@@ -343,9 +419,9 @@
           '<tr class="' +
           (inactive ? 'is-inactive' : '') +
           '">' +
-          '<td><div class="adm-provider-cell"><span class="adm-avatar">' +
-          initials(p.nome) +
-          '</span><div><strong>' +
+          '<td><div class="adm-provider-cell">' +
+          admAvatarHtml(p) +
+          '<div><strong>' +
           escapeHtml(p.nome) +
           '</strong><small>' +
           escapeHtml(p.slug) +
@@ -558,31 +634,67 @@
     const p = Store.getById(id);
     if (!p) return;
 
+    editModalPrestador = p;
+    editFotoPending = undefined;
+    const fileInput = $('edit-foto-file');
+    if (fileInput) fileInput.value = '';
+
     $('edit-id').value = p.id;
     $('edit-nome').value = p.nome || '';
     $('edit-whatsapp').value = p.whatsapp || '';
     $('edit-bairro').value = p.bairro || '';
     $('edit-nota').value = p.nota != null ? p.nota : 4.5;
     $('edit-descricao').value = p.descricao || '';
+    if ($('edit-foto-url')) {
+      $('edit-foto-url').value = p.fotoUrl && !p.foto ? p.fotoUrl : '';
+    }
     fillCategoriaSelect($('edit-categoria'), p.categoria);
+    renderEditFotoPreview();
     $('modal-edit').removeAttribute('hidden');
   }
 
   function closeEditModal() {
     $('modal-edit').setAttribute('hidden', '');
+    editModalPrestador = null;
+    editFotoPending = undefined;
+  }
+
+  function buildFotoPatch() {
+    const patch = {};
+    if (editFotoPending !== undefined) {
+      if (!editFotoPending) {
+        patch.foto = '';
+        patch.fotoUrl = '';
+      } else {
+        patch.foto = editFotoPending;
+        patch.fotoUrl = '';
+      }
+      return patch;
+    }
+    const url = $('edit-foto-url') ? $('edit-foto-url').value.trim() : '';
+    const hadUrl = editModalPrestador && editModalPrestador.fotoUrl && !editModalPrestador.foto;
+    if (url && /^https?:\/\//i.test(url)) {
+      patch.fotoUrl = url;
+      patch.foto = '';
+    } else if (hadUrl && !url) {
+      patch.fotoUrl = '';
+    }
+    return patch;
   }
 
   function saveEdit(e) {
     if (e) e.preventDefault();
     if (!Store) return;
-    Store.update($('edit-id').value, {
+    const patch = {
       nome: $('edit-nome').value.trim(),
       whatsapp: $('edit-whatsapp').value.replace(/\D/g, ''),
       bairro: $('edit-bairro').value.trim(),
       categoria: $('edit-categoria').value,
       nota: parseFloat($('edit-nota').value) || 4.5,
       descricao: $('edit-descricao').value.trim(),
-    });
+    };
+    Object.assign(patch, buildFotoPatch());
+    Store.update($('edit-id').value, patch);
     closeEditModal();
     toast('Profissional salvo. Recarregue o site público (F5).', 'success');
     renderPrestadores();
@@ -677,6 +789,58 @@
     $('modal-edit').addEventListener('click', function (e) {
       if (e.target === $('modal-edit')) closeEditModal();
     });
+
+    if ($('edit-foto-choose') && $('edit-foto-file')) {
+      $('edit-foto-choose').addEventListener('click', function () {
+        $('edit-foto-file').click();
+      });
+      $('edit-foto-file').addEventListener('change', function () {
+        const file = $('edit-foto-file').files && $('edit-foto-file').files[0];
+        if (!file) return;
+        if (!FotoUtil || typeof FotoUtil.compressFile !== 'function') {
+          toast('Módulo de foto não carregado', 'error');
+          return;
+        }
+        FotoUtil.compressFile(file)
+          .then(function (dataUrl) {
+            editFotoPending = dataUrl;
+            if ($('edit-foto-url')) $('edit-foto-url').value = '';
+            renderEditFotoPreview();
+            toast('Imagem pronta — clique em Salvar', 'success');
+          })
+          .catch(function (err) {
+            toast(err && err.message ? err.message : 'Erro ao processar imagem', 'error');
+            $('edit-foto-file').value = '';
+          });
+      });
+    }
+
+    if ($('edit-foto-remove')) {
+      $('edit-foto-remove').addEventListener('click', function () {
+        editFotoPending = '';
+        if ($('edit-foto-file')) $('edit-foto-file').value = '';
+        if ($('edit-foto-url')) $('edit-foto-url').value = '';
+        renderEditFotoPreview();
+      });
+    }
+
+    if ($('edit-foto-url')) {
+      $('edit-foto-url').addEventListener('input', function () {
+        if ($('edit-foto-url').value.trim()) {
+          editFotoPending = undefined;
+          if ($('edit-foto-file')) $('edit-foto-file').value = '';
+        }
+        renderEditFotoPreview();
+      });
+    }
+
+    if ($('edit-nome')) {
+      $('edit-nome').addEventListener('input', function () {
+        if (editFotoPending === undefined && !getEditFotoPreviewSrc()) {
+          renderEditFotoPreview();
+        }
+      });
+    }
 
     $('search-prestadores').addEventListener('input', function (e) {
       searchQuery = e.target.value.trim();

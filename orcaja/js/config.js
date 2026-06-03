@@ -103,6 +103,9 @@ const RESOLVEAI_CONFIG = {
 
   permitirPagamentoDemo: true,
 
+  /** Tamanho máximo da foto de perfil (base64) após compressão no admin */
+  maxFotoKb: 400,
+
   admin: {
     pin: '1234',
   },

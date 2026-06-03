@@ -805,7 +805,7 @@ body.adm-body {
 .adm-avatar {
   width: 36px;
   height: 36px;
-  border-radius: 8px;
+  border-radius: 50%;
   background: linear-gradient(135deg, var(--adm-primary), #4ade80);
   color: #0a0f14;
   font-weight: 700;
@@ -814,6 +814,76 @@ body.adm-body {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  overflow: hidden;
+}
+
+.adm-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+
+.adm-foto-field .adm-label {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--adm-muted);
+  margin-bottom: 8px;
+}
+
+.adm-foto-row {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.adm-foto-preview {
+  width: 72px;
+  height: 72px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--adm-primary), #4ade80);
+  color: #0a0f14;
+  font-weight: 800;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.adm-foto-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  display: block;
+}
+
+.adm-foto-actions {
+  flex: 1;
+  min-width: 0;
+}
+
+.adm-foto-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.adm-foto-hint {
+  font-size: 0.72rem;
+  color: var(--adm-muted);
+  margin: 0 0 10px;
+}
+
+.adm-foto-url-label {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--adm-muted);
+  margin-bottom: 4px;
 }
 
 .adm-provider-cell small {

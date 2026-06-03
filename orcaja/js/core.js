@@ -66,12 +66,39 @@ window.OrcajaCore = (function () {
   }
 
   function initials(name) {
-    return name
+    return (name || '?')
       .split(' ')
       .slice(0, 2)
       .map((w) => w[0])
       .join('')
       .toUpperCase();
+  }
+
+  function escapeAttr(str) {
+    return String(str || '')
+      .replace(/&/g, '&amp;')
+      .replace(/"/g, '&quot;')
+      .replace(/</g, '&lt;');
+  }
+
+  /** URL da foto: base64 em `foto` ou link externo em `fotoUrl` */
+  function getPrestadorFoto(p) {
+    if (!p) return null;
+    const src = (p.foto && String(p.foto).trim()) || (p.fotoUrl && String(p.fotoUrl).trim());
+    if (!src) return null;
+    if (p.fotoUrl && src === String(p.fotoUrl).trim() && !/^https?:\/\//i.test(src)) {
+      return null;
+    }
+    return src;
+  }
+
+  function renderProviderAvatarHtml(p) {
+    const src = getPrestadorFoto(p);
+    if (src) {
+      const alt = escapeAttr(p.nome || 'Profissional');
+      return `<img src="${escapeAttr(src)}" alt="${alt}" loading="lazy" decoding="async">`;
+    }
+    return initials(p.nome);
   }
 
   function stars(n) {
@@ -156,7 +183,7 @@ window.OrcajaCore = (function () {
     return `
       <article class="${cardClass}" data-id="${p.id}">
         <div class="provider-card__header">
-          <div class="provider-card__avatar" aria-hidden="true">${initials(p.nome)}</div>
+          <div class="provider-card__avatar" aria-hidden="true">${renderProviderAvatarHtml(p)}</div>
           <div class="provider-card__info">
             <h3 class="provider-card__name"><a href="${profileUrl}">${p.nome}</a></h3>
             <p class="provider-card__meta">${profissao} · ${p.bairro}, ${p.cidade}</p>
@@ -253,5 +280,7 @@ window.OrcajaCore = (function () {
     getWhatsappUrl,
     initials,
     stars,
+    getPrestadorFoto,
+    renderProviderAvatarHtml,
   };
 })();
