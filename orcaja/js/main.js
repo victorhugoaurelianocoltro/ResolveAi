@@ -124,7 +124,12 @@
       servico.innerHTML =
         '<option value="">Selecione o profissional</option>' +
         cfg.categorias.map((c) => `<option value="${c.id}">${c.label}</option>`).join('');
-      if (cfg.mainNiche) servico.value = cfg.mainNiche;
+      const qsServico = new URLSearchParams(window.location.search).get('servico');
+      if (qsServico && cfg.categorias.some((c) => c.id === qsServico)) {
+        servico.value = qsServico;
+      } else if (cfg.mainNiche) {
+        servico.value = cfg.mainNiche;
+      }
     }
 
     if (urgencia && cfg.urgenciaOpcoes) {

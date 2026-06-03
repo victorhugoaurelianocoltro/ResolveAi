@@ -39,11 +39,12 @@ Detalhes com prints: [LINK-NO-GITHUB.md](../LINK-NO-GITHUB.md) (na raiz do repos
 | Passo | Onde | O que você vê |
 |--------|------|----------------|
 | 1 | **Home** (`index.html`) | Tema escuro ResolveAí, hero com urgência, 10 profissionais, depoimentos, FAQ |
-| 2 | Formulário **“Pedir ajuda agora”** | Preencha nome, WhatsApp, cidade, profissão → **sucesso** (`sucesso.html`) |
-| 3 | **Buscar** (`busca.html`) | Filtros por profissão e cards dos prestadores |
-| 4 | **Perfil** | Ex.: `prestador.html?slug=eletrosp-urgente` — selos, WhatsApp, serviços |
-| 5 | **Para empresas** (`anunciar.html`) | Planos + cadastro → `checkout.html` → **Simular pagamento** (demo) → `checkout-sucesso.html` |
-| 6 | Páginas SEO | `eletricista-em-sao-paulo.html`, `encanador-em-sao-paulo.html`, etc. |
+| 2 | **Assistente** (`ajuda.html`) | Chat com IA (regras locais): dúvidas, serviços, chips rápidos; **Falar com humano** → WhatsApp; **Pedir profissional** → triagem na Home |
+| 3 | Formulário **“Triagem rápida (30s)”** na Home | Preencha nome, WhatsApp, cidade, profissão → **sucesso** (`sucesso.html`) |
+| 4 | **Buscar** (`busca.html`) | Filtros por profissão e cards dos prestadores |
+| 5 | **Perfil** | Ex.: `prestador.html?slug=eletrosp-urgente` — selos, WhatsApp, serviços |
+| 6 | **Para empresas** (`anunciar.html`) | Planos + cadastro → `checkout.html` → **Simular pagamento** (demo) → `checkout-sucesso.html` |
+| 7 | Páginas SEO | `eletricista-em-sao-paulo.html`, `encanador-em-sao-paulo.html`, etc. |
 
 ### Painel admin (dono do site)
 
@@ -71,7 +72,8 @@ Para limpar dados de teste: DevTools (F12) → Application → Local Storage →
 
 Edite **`js/config.js`** antes de divulgar o site de verdade:
 
-- [ ] **`whatsappAdmin`** — seu WhatsApp com DDI (ex.: `5511999887766`)
+- [ ] **`whatsappAdmin`** e **`atendimento.whatsapp`** — WhatsApp com DDI (atendimento humano no assistente)
+- [ ] **`ai.openaiApiKey`** — opcional; vazio = assistente por regras locais (sem API)
 - [ ] **`contactEmail`** — e-mail que recebe leads
 - [ ] **`domain`** — URL final (ex.: `https://resolveai.com.br`)
 - [ ] **`stripe`** — Payment Links reais (substituir `SEU_LINK_*`)

@@ -20,6 +20,7 @@ const RESOLVEAI_CONFIG = {
     heroSubtitle:
       'Descreva o problema. Profissionais verificados da sua região respondem no WhatsApp — sem app, sem cadastro longo.',
     ctaPrimary: 'Pedir ajuda agora',
+    ctaTriagem: 'Triagem rápida (30s)',
     ctaSecondary: 'Sou profissional — quero aparecer primeiro',
     prestadorCta: 'Apareça quando alguém precisa AGORA',
   },
@@ -106,6 +107,22 @@ const RESOLVEAI_CONFIG = {
     pin: '1234',
   },
 
+  ai: {
+    assistantName: 'Assistente ResolveAí',
+    enabled: true,
+    /** Opcional: preencha para respostas via OpenAI (senão usa regras locais) */
+    openaiApiKey: '',
+    welcomeHint:
+      'Triagem grátis em ~30s, profissionais verificados na sua região e retorno no WhatsApp — sem app.',
+  },
+
+  atendimento: {
+    whatsapp: '', // vazio = usa whatsappAdmin
+    horario: 'Atendimento humano: seg–sáb, 8h–20h',
+    mensagemPadrao:
+      'Olá! Vim pelo Assistente ResolveAí e gostaria de falar com um atendente humano.',
+  },
+
   categorias: [
     { id: 'eletricista', label: 'Eletricista', icon: '⚡', slug: 'eletricista' },
     { id: 'encanador', label: 'Encanador', icon: '🔧', slug: 'encanador' },
@@ -135,6 +152,10 @@ const RESOLVEAI_CONFIG = {
 
 if (RESOLVEAI_CONFIG.googlePlacesApiKey && !RESOLVEAI_CONFIG.googlePlaces.apiKey) {
   RESOLVEAI_CONFIG.googlePlaces.apiKey = RESOLVEAI_CONFIG.googlePlacesApiKey;
+}
+
+if (RESOLVEAI_CONFIG.atendimento && !RESOLVEAI_CONFIG.atendimento.whatsapp) {
+  RESOLVEAI_CONFIG.atendimento.whatsapp = RESOLVEAI_CONFIG.whatsappAdmin;
 }
 
 /** Compatibilidade com scripts existentes */
